@@ -12,23 +12,23 @@ function Projects() {
   const projects = [
     {
       title: 'Soru Bankası Uygulaması',
-      description: 'Work efficiently with instant access to common actions.',
+      description: 'Basit arayüzlü soru bankası oluşturma uygulaması',
       image: '/birinci.png',
-      tags: ['Python', 'QtDesigner'],
+      tags: ['Python', 'QtDesigner','PySide6'],
       demoLink: '#',
       githubLink: 'https://github.com/kaanxdgn/sorubankas-'
     },
     {
       title: 'Metin Düzenleyici',
-      description: 'Keep track of the bigger picture with our centralized team calendar.',
+      description: 'Basit bir metin düzenleme uygulaması',
       image: '/ikinci.png',
-      tags: ['Python', 'QtDesigner'],
+      tags: ['Python', 'QtDesigner','Pyside6'],
       demoLink: '#',
       githubLink: 'https://github.com/kaanxdgn/Kelime_islemci'
     },
     {
       title: 'Sporcu Kayıt Sistemi',
-      description: 'Transform daily tasks into structured time blocks for focused productivity.',
+      description: 'Merkezi sporcu kayıt ve işlem uygulaması',
       image: '/ucuncu.png',
       tags: ['Python', 'PyQt5','SQLite','PySide6'],
       demoLink: '#',
