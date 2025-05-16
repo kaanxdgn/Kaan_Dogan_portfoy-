@@ -1,0 +1,249 @@
+.projects {
+  padding: 8rem 4rem;
+  background-color: var(--dark);
+  position: relative;
+}
+
+.projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(112, 0, 255, 0.1), transparent 50%);
+  pointer-events: none;
+}
+
+.projects-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.project-card {
+  border-radius: 24px;
+  overflow: visible;
+  background: rgba(20, 20, 25, 0.95);
+  position: relative;
+  aspect-ratio: 1/1;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient);
+  opacity: 0.1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  transform: translateZ(0);
+}
+
+/* Tilt efekti için parlaklık katmanı */
+.js-tilt-glare {
+  border-radius: 24px;
+}
+
+.project-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.project-card:hover::before {
+  opacity: 0.15;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  transform: translateZ(20px);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+/* Fotoğraf yüklenene kadar gösterilecek gradient arka plan */
+.project-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, var(--dark) 0%, var(--darker) 100%);
+  opacity: 0.1;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-link {
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  color: var(--light);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.project-link:hover {
+  background: var(--gradient);
+  transform: translateY(-2px);
+}
+
+.project-link.github-link {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%) translateX(60px);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  background: var(--gradient);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 10;
+  pointer-events: auto;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+.project-card:hover .project-link.github-link {
+  transform: translateY(-50%) translateX(0);
+}
+
+.project-link.github-link:hover {
+  transform: translateY(-50%) translateX(0) scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  opacity: 0.9;
+}
+
+.project-link.github-link svg {
+  font-size: 1.1rem;
+}
+
+/* Etiketler ve GitHub butonu için ortak stil */
+.project-tags span,
+.project-link.github-link {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.project-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7) 50%,
+    transparent
+  );
+  transform: translateZ(30px);
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--light);
+  font-weight: 600;
+}
+
+.project-info p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  transform: translateZ(40px);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-tags span {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.95);
+  background: var(--gradient);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translateZ(50px);
+}
+
+.project-tags span:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0.9;
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .projects {
+    padding: 4rem 2rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+} 

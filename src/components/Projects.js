@@ -1,0 +1,71 @@
+import React, { useEffect } from 'react';
+import './Projects.css';
+import { initializeCardTilt } from './ProjectCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
+function Projects() {
+  useEffect(() => {
+    initializeCardTilt();
+  }, []);
+
+  const projects = [
+    {
+      title: 'Soru Bankası Uygulaması',
+      description: 'Work efficiently with instant access to common actions.',
+      image: '/birinci.png',
+      tags: ['Python', 'QtDesigner'],
+      demoLink: '#',
+      githubLink: 'https://github.com/kaanxdgn/sorubankas-'
+    },
+    {
+      title: 'Metin Düzenleyici',
+      description: 'Keep track of the bigger picture with our centralized team calendar.',
+      image: '/ikinci.png',
+      tags: ['Python', 'QtDesigner'],
+      demoLink: '#',
+      githubLink: 'https://github.com/kaanxdgn/Kelime_islemci'
+    },
+    {
+      title: 'Sporcu Kayıt Sistemi',
+      description: 'Transform daily tasks into structured time blocks for focused productivity.',
+      image: '/ucuncu.png',
+      tags: ['Python', 'PyQt5','SQLite','PySide6'],
+      demoLink: '#',
+      githubLink: 'https://github.com/kaanxdgn/sporcukayituygulamasi'
+    }
+  ];
+
+  return (
+    <section id="projects" className="projects">
+      <div className="projects-content">
+        <h2 className="section-title">Projelerim</h2>
+        <div className="projects-grid">
+          {projects.map((project, index) => (
+            <div className="project-card" key={index}>
+              <div className="project-image">
+                <img src={project.image} alt={project.title} loading="lazy" />
+                <div className="project-overlay">
+                  <a href={project.githubLink} className="project-link github-link" target="_blank" rel="noopener noreferrer">
+                    <FontAwesomeIcon icon={faGithub} /> GitHub
+                  </a>
+                </div>
+              </div>
+              <div className="project-info">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="project-tags">
+                  {project.tags.map((tag, tagIndex) => (
+                    <span key={tagIndex}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Projects; 

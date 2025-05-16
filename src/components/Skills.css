@@ -1,0 +1,245 @@
+/* Hexagon Grid Layout */
+.skills-section {
+  padding: 8rem 4rem;
+  background-color: #000000;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+
+.skills-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.03), transparent 30%),
+    radial-gradient(circle at 100% 0, rgba(255, 255, 255, 0.03), transparent 30%),
+    radial-gradient(circle at 0 100%, rgba(255, 255, 255, 0.03), transparent 30%),
+    radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.03), transparent 30%);
+  pointer-events: none;
+}
+
+.skills-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.skills-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+  gap: 15px;
+}
+
+.skills-track {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.skills-track:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.skill-icon {
+  --icon-color: var(--accent-color);
+  position: relative;
+  width: 150px;
+  height: 173.2px; /* Hexagon height = width * 1.1547 */
+  margin: 0 8px 15px;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+  animation-delay: var(--delay);
+  will-change: transform, opacity;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.skill-icon-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.skill-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  filter: blur(15px);
+}
+
+.skill-icon:hover::before {
+  opacity: 0.1;
+}
+
+.skill-icon:hover .skill-icon-inner {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.skill-icon svg,
+.skill-icon .custom-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--icon-color) 30%, transparent));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.skill-icon:hover svg,
+.skill-icon:hover .custom-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 12px var(--icon-color));
+}
+
+.skill-icon .custom-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.skill-icon span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--icon-color) 80%, white),
+    var(--icon-color)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: filter 0.3s ease;
+}
+
+.skill-icon:hover span {
+  filter: drop-shadow(0 0 8px var(--icon-color));
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mouse movement effect */
+.skill-icon-inner {
+  transition: transform 0.2s ease;
+}
+
+.skills-container:hover .skill-icon:not(:hover) .skill-icon-inner {
+  transform: scale(0.95);
+  filter: brightness(0.7);
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .skills-section {
+    padding: 4rem 1rem;
+  }
+
+  .skills-container {
+    gap: 10px;
+  }
+
+  .skill-icon {
+    width: 120px;
+    height: 138.56px;
+    margin: 0 4px 10px;
+  }
+
+  .skill-icon-inner {
+    padding: 1rem;
+  }
+
+  .skill-icon svg,
+  .skill-icon .custom-icon {
+    font-size: 2rem;
+  }
+
+  .skill-icon span {
+    font-size: 0.8rem;
+  }
+
+  .skill-icon:hover .skill-icon-inner {
+    transform: translateY(-4px);
+  }
+}
+
+.spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(
+      100px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.15),
+      transparent 60%
+    ),
+    radial-gradient(
+      200px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.08),
+      transparent 70%
+    ),
+    radial-gradient(
+      300px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.03),
+      transparent 80%
+    );
+  z-index: 1;
+}
+
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.6);
+}
+
+.custom-cursor.hover {
+  transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
+  background: var(--primary);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 15px 3px var(--primary);
+} 
