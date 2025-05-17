@@ -12,7 +12,7 @@ function About() {
               Küçük yaşlardan beri bilgisayar ve teknoloji ile iç içe geçmişimdir.C# python JavaScript Java HTML CSS dillerini MATLAB ve QtDesigner uygulamalarını temel seviyede bilmekteyim.
             </p>
             <p>
-              Bunların dışında kendim hobi olarak Photoshop,Premiere Pro gibi editörleri amatör seviyede kullanıyorum.Genellikle macOS ortamında çalışıyorum.QtDesigner uygulaması ile python tabanlı frontend geliştiriyorum.
+              Bunların dışında kendim hobi olarak Photoshop,Premiere Pro gibi editörleri amatör seviyede kullanıyorum.Fusion360 ile 3D tasarımlar yapıyorum.QtDesigner uygulaması ile python tabanlı frontend geliştiriyorum.
               Ayrıca hobi olarak resim çizmeyi matematik ve geometri ile uğraşmaktan keyif alıyorum.Tabi tüm bunları yaparken bir taraftan da bilek güreşi sporuyla ilgileniyorum.
             </p>
           </div>
