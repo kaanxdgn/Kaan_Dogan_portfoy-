@@ -33,6 +33,21 @@ function Projects() {
       tags: ['Python', 'PyQt5','SQLite','PySide6'],
       demoLink: '#',
       githubLink: 'https://github.com/kaanxdgn/sporcukayituygulamasi'
+    },
+    {
+      title: 'Uzaktan Kumandalı Otonom Bot',
+      description: 'Uzaktan kumandalı arduino ile yapılmış deniz aracı',
+      image: '/dorduncu.jpg',
+      tags: ['Arduino'],
+      demoLink: '#',
+      
+    },
+    {
+      title: 'Otomatik yangın aracı',
+      description: 'Kendisi yangın algılayıp söndüren enerjisini güneş paneliyle güneşten alan yangın aracı',
+      image: '/besinci.jpg',
+      tags: ['Arduino'],
+      demoLink: '#',
     }
   ];
 
