@@ -37,7 +37,7 @@ function Projects() {
     {
       title: 'Uzaktan Kumandalı Otonom Bot',
       description: 'Uzaktan kumandalı arduino ile yapılmış deniz aracı',
-      image: '/dorduncu.jpg',
+      image: '/dorduncu.png',
       tags: ['Arduino'],
       demoLink: '#',
       
@@ -45,7 +45,7 @@ function Projects() {
     {
       title: 'Otomatik yangın aracı',
       description: 'Kendisi yangın algılayıp söndüren enerjisini güneş paneliyle güneşten alan yangın aracı',
-      image: '/besinci.jpg',
+      image: '/besinci.png',
       tags: ['Arduino'],
       demoLink: '#',
     }
