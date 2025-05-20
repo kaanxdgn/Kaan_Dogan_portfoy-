@@ -8,6 +8,8 @@ import {
   faInstagram,
   faYoutube 
 } from '@fortawesome/free-brands-svg-icons';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -18,6 +20,39 @@ function Contact() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  
+  // Reference for detecting when contact grid is in view
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  // Animation variants
+  const leftVariant = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { 
+        duration: 1.1,  // Increased duration
+        delay: 0.2,     // Added delay
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const rightVariant = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { 
+        duration: 1.1,  // Increased duration
+        delay: 0.4,     // Added delay
+        ease: "easeOut"
+      }
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -47,8 +82,13 @@ function Contact() {
     <section id="contact" className="contact">
       <div className="contact-content">
         <h2 className="section-title">İletişim</h2>
-        <div className="contact-grid">
-          <div className="contact-info glass">
+        <div className="contact-grid" ref={ref}>
+          <motion.div 
+            className="contact-info glass"
+            variants={leftVariant}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             <h3>Sosyal Medya</h3>
             <p>
               Beraber proje yapmak, uygulama geliştirmek, yeni fikirler paylaşmak için iletişime geçebilirsiniz.
@@ -99,8 +139,14 @@ function Contact() {
                 <FontAwesomeIcon icon={faYoutube} />
               </a>
             </div>
-          </div>
-          <form className="contact-form glass" onSubmit={handleSubmit}>
+          </motion.div>
+          <motion.form 
+            className="contact-form glass" 
+            onSubmit={handleSubmit}
+            variants={rightVariant}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             <div className="form-group">
               <label htmlFor="name">İsim Soyisim</label>
               <input
@@ -148,7 +194,7 @@ function Contact() {
                 {submitStatus === 'Başarılı' ? 'Mesaj Başarıyla Gönderildi!' : 'Mesaj Gönderilemedi.'}
               </div>
             )}
-          </form>
+          </motion.form>
         </div>
       </div>
     </section>

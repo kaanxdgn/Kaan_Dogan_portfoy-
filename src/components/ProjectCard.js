@@ -4,6 +4,11 @@ export const initializeCardTilt = () => {
   const cards = document.querySelectorAll('.project-card');
   
   cards.forEach(card => {
+    // Skip initialization if already initialized
+    if (card.vanillaTilt) {
+      return;
+    }
+    
     // Tilt efekti
     VanillaTilt.init(card, {
       max: 15,

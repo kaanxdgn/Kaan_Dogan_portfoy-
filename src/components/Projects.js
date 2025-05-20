@@ -3,11 +3,54 @@ import './Projects.css';
 import { initializeCardTilt } from './ProjectCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function Projects() {
+  // Reference to detect when projects are in view
+  const [projectsRef, projectsInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  // Animation variants for container
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  // Animation variants for each card
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.0,
+        ease: "easeOut"
+      }
+    }
+  };
+
   useEffect(() => {
-    initializeCardTilt();
-  }, []);
+    // We need to initialize card tilt after the animations complete
+    if (projectsInView) {
+      // Give time for animations to complete before initializing tilt
+      const timer = setTimeout(() => {
+        initializeCardTilt();
+      }, 1500); // Wait for animations to substantially complete
+      
+      return () => clearTimeout(timer);
+    }
+  }, [projectsInView]);
 
   const projects = [
     {
@@ -55,9 +98,20 @@ function Projects() {
     <section id="projects" className="projects">
       <div className="projects-content">
         <h2 className="section-title">Projelerim</h2>
-        <div className="projects-grid">
+        <motion.div 
+          className="projects-grid"
+          ref={projectsRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={projectsInView ? "visible" : "hidden"}
+        >
           {projects.map((project, index) => (
-            <div className="project-card" key={index}>
+            <motion.div 
+              className="project-card" 
+              key={index}
+              variants={cardVariants}
+              custom={index}
+            >
               <div className="project-image">
                 <img src={project.image} alt={project.title} loading="lazy" />
                 <div className="project-overlay">
@@ -75,9 +129,9 @@ function Projects() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -11,10 +11,43 @@ import {
   faCuttlefish,
   faApple
 } from '@fortawesome/free-brands-svg-icons';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function Skills() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorHover, setCursorHover] = useState(false);
+  
+  // Reference to detect when skills container is in view
+  const [skillsRef, skillsInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  // Animation variants for skill icons
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 20
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.9,
+        ease: "easeOut"
+      }
+    }
+  };
 
   // Throttle function to improve performance
   const throttle = (func, limit) => {
@@ -120,9 +153,10 @@ function Skills() {
   ];
 
   const renderSkillIcon = (skill, index) => (
-    <div 
+    <motion.div 
       className="skill-icon" 
       key={index}
+      variants={iconVariants}
       style={{
         '--icon-color': skill.color,
         '--delay': `${index * 0.05}s`
@@ -136,7 +170,7 @@ function Skills() {
         )}
         <span>{skill.name}</span>
       </div>
-    </div>
+    </motion.div>
   );
 
   return (
@@ -150,9 +184,15 @@ function Skills() {
       ></div>
       <div className="skills-content">
         <h2 className="section-title">Neler Yapabilirim?</h2>
-        <div className="skills-container">
+        <motion.div 
+          className="skills-container"
+          ref={skillsRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={skillsInView ? "visible" : "hidden"}
+        >
           {skills.map((skill, index) => renderSkillIcon(skill, index))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
