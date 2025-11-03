@@ -105,7 +105,7 @@ function Hero() {
         </h1>
         <h2 className="hero-subtitle">Bilgisayar Mühendisliği Öğrencisi</h2>
         <p className="hero-description">
-          Balıkesir Üniversitesi Bilgisayar Mühendisliği 2. sınıf öğrencisiyim.Yazılım geliştirmek algoritma kurmaktan keyif alıyorum.
+          Balıkesir Üniversitesi Bilgisayar Mühendisliği 3. sınıf öğrencisiyim.Yazılım geliştirmek algoritma kurmaktan keyif alıyorum.
         </p>
         <div className="hero-buttons">
           <button className="gradient-border glass" onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
